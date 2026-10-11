@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d1c">
+  <meta name="description" content="Crossroads Bot brings moderation, verification, private tickets, reminders, leveling, polls, community tools, and mini-games to your Discord server.">
+  <title>Crossroads Bot ✦ — Your community, connected</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0b16;
+      --panel: rgba(255,255,255,.045);
+      --panel-strong: rgba(255,255,255,.075);
+      --line: rgba(222,210,255,.13);
+      --text: #f6f2ff;
+      --muted: #aaa3bc;
+      --purple: #b8a0ff;
+      --purple-strong: #9777ff;
+      --pink: #f0a4e8;
+      --mint: #a4ecd4;
+      --radius: 24px;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 15% 2%, rgba(120,79,210,.2), transparent 34rem),
+        radial-gradient(ellipse at 93% 27%, rgba(174,92,193,.12), transparent 29rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin-inline: auto; }
+    .nav-shell { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid rgba(255,255,255,.06); background: rgba(13,11,22,.78); backdrop-filter: blur(18px); }
+    nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 760; letter-spacing: -.035em; font-size: 1.04rem; white-space: nowrap; }
+    .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 13px; color: #171025; background: linear-gradient(145deg, #e3d8ff, #9b7bff); font-size: 1.3rem; box-shadow: 0 0 28px rgba(156,121,255,.22); }
+    .nav-links { display: flex; align-items: center; gap: 27px; color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover, footer a:hover { color: var(--text); }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 47px; padding: 0 19px; border-radius: 14px; border: 1px solid transparent; font-weight: 720; font-size: .91rem; transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #191226; background: linear-gradient(135deg, #e0d4ff, #a88bff 70%, #c9a9f7); box-shadow: 0 8px 30px rgba(142,105,255,.2); }
+    .button-primary:hover { box-shadow: 0 11px 34px rgba(142,105,255,.32); }
+    .button-secondary { background: rgba(255,255,255,.04); border-color: var(--line); color: var(--text); }
+    .button-secondary:hover { background: rgba(255,255,255,.08); border-color: rgba(222,210,255,.3); }
+    .nav-cta { min-height: 40px; padding-inline: 15px; font-size: .86rem; }
+    .hero { min-height: 660px; padding: 92px 0 96px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 56px; position: relative; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; padding: 7px 12px; border: 1px solid rgba(184,160,255,.23); border-radius: 999px; background: rgba(184,160,255,.075); color: #ded3ff; font-size: .79rem; letter-spacing: .02em; font-weight: 650; }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 12px rgba(164,236,212,.7); }
+    h1 { max-width: 680px; margin: 22px 0 21px; font-size: clamp(3.1rem, 6.4vw, 5.7rem); line-height: .99; letter-spacing: -.075em; font-weight: 810; }
+    .gradient-text { color: transparent; background: linear-gradient(100deg, #e6deff 8%, #b7a0ff 49%, #efa8e5 95%); background-clip: text; -webkit-background-clip: text; }
+    .hero-copy { max-width: 540px; color: #b7b0c7; font-size: 1.08rem; line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hero-note { margin-top: 20px; color: #817a94; font-size: .82rem; }
+    .hero-visual { min-height: 460px; position: relative; display: grid; place-items: center; }
+    .orbital { position: absolute; width: min(100%, 475px); aspect-ratio: 1; border-radius: 50%; border: 1px solid rgba(184,160,255,.14); background: radial-gradient(circle at 48% 43%, rgba(135,93,234,.18), rgba(97,63,147,.055) 43%, transparent 68%); }
+    .orbital::before, .orbital::after { content: ""; position: absolute; border: 1px solid rgba(184,160,255,.1); border-radius: 50%; inset: 12%; }
+    .orbital::after { inset: 25%; border-style: dashed; border-color: rgba(240,164,232,.14); }
+    .spark { position: absolute; color: #e2d5ff; font-size: 1.15rem; text-shadow: 0 0 20px rgba(184,160,255,.6); }
+    .spark.s1 { top: 12%; left: 22%; }.spark.s2 { top: 26%; right: 9%; color: var(--pink); }.spark.s3 { bottom: 13%; left: 17%; font-size: .85rem; }.spark.s4 { bottom: 20%; right: 15%; color: var(--mint); }
+    .app-card { position: relative; z-index: 1; width: min(100%, 390px); padding: 19px; border-radius: 25px; border: 1px solid rgba(231,221,255,.19); background: linear-gradient(145deg, rgba(36,29,55,.95), rgba(19,16,31,.94)); box-shadow: 0 32px 100px rgba(0,0,0,.42), 0 0 70px rgba(138,98,232,.12); transform: rotate(1.2deg); }
+    .app-top { display: flex; align-items: center; justify-content: space-between; padding: 0 1px 15px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .app-top-label { display: flex; align-items: center; gap: 10px; font-size: .86rem; font-weight: 750; }
+    .mini-mark { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 10px; background: #b9a2ff; color: #21182f; }
+    .online { display: inline-flex; align-items: center; gap: 6px; color: #aaa3bd; font-size: .72rem; }
+    .online::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); }
+    .server-title { margin: 19px 0 12px; font-size: .72rem; color: #8d84a4; text-transform: uppercase; letter-spacing: .12em; font-weight: 750; }
+    .chat-line { display: flex; gap: 10px; margin: 13px 0; align-items: flex-start; }
+    .avatar { width: 31px; height: 31px; flex: 0 0 31px; border-radius: 11px; display: grid; place-items: center; font-size: .8rem; font-weight: 800; color: #21182e; background: linear-gradient(135deg, #f4b8e9, #c2a7ff); }
+    .avatar.member { color: #1a302b; background: linear-gradient(135deg, #b5f3dd, #b6dbff); }
+    .message { flex: 1; padding-top: 1px; min-width: 0; }
+    .message-head { display: flex; align-items: baseline; gap: 8px; font-size: .75rem; font-weight: 740; }
+    .message-head small { color: #7d748f; font-weight: 500; font-size: .65rem; }
+    .message-body { color: #b9b1ca; font-size: .78rem; line-height: 1.55; margin-top: 4px; }
+    .command { display: inline-block; padding: 2px 7px; border: 1px solid rgba(184,160,255,.18); border-radius: 6px; background: rgba(184,160,255,.1); color: #d5c6ff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .73rem; }
+    .game-row { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-top: 15px; padding: 12px; border-radius: 13px; background: rgba(184,160,255,.07); border: 1px solid rgba(184,160,255,.13); }
+    .game-row strong { display: block; font-size: .76rem; }.game-row span { display: block; color: #958ca9; font-size: .68rem; margin-top: 2px; }
+    .play-pill { background: rgba(164,236,212,.12); color: var(--mint); border-radius: 9px; padding: 6px 9px; font-size: .7rem; font-weight: 750; white-space: nowrap; }
+    .trust-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 23px 0; border-top: 1px solid rgba(255,255,255,.07); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .trust-item { display: flex; justify-content: center; align-items: center; gap: 10px; color: #b9b2c9; font-size: .83rem; }
+    .trust-icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; background: rgba(184,160,255,.09); color: #cabbff; font-size: 1rem; }
+    section { padding: 104px 0; }
+    .section-heading { max-width: 660px; margin: 0 auto 48px; text-align: center; }
+    .kicker { color: #c6b5ff; text-transform: uppercase; font-size: .75rem; font-weight: 800; letter-spacing: .16em; }
+    h2 { margin: 13px 0 14px; font-size: clamp(2.1rem, 4.1vw, 3.45rem); line-height: 1.08; letter-spacing: -.06em; }
+    .section-heading p { color: var(--muted); font-size: 1rem; margin: 0; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { min-height: 220px; padding: 26px; border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+    .feature:hover { transform: translateY(-4px); border-color: rgba(184,160,255,.3); background: linear-gradient(145deg, rgba(184,160,255,.08), rgba(255,255,255,.025)); }
+    .feature-icon { width: 47px; height: 47px; display: grid; place-items: center; margin-bottom: 23px; border: 1px solid rgba(184,160,255,.17); background: rgba(184,160,255,.09); color: #d4c7ff; border-radius: 15px; font-size: 1.25rem; }
+    .feature h3 { margin: 0 0 8px; font-size: 1.05rem; letter-spacing: -.025em; }
+    .feature p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.75; }
+    .games-section { padding-top: 35px; }
+    .games-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: .95fr 1.05fr; gap: 45px; align-items: center; padding: 52px; border-radius: 32px; border: 1px solid rgba(184,160,255,.2); background: radial-gradient(ellipse at 90% 10%, rgba(171,114,221,.16), transparent 35%), linear-gradient(140deg, rgba(43,32,65,.66), rgba(24,19,38,.9)); }
+    .games-copy h2 { font-size: clamp(2rem, 3.7vw, 3rem); }
+    .games-copy p { color: var(--muted); }
+    .game-chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+    .chip { padding: 7px 11px; border-radius: 11px; border: 1px solid rgba(222,210,255,.13); color: #d2c9e3; background: rgba(255,255,255,.035); font-size: .78rem; }
+    .game-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; transform: rotate(-1.5deg); }
+    .game-tile { display: flex; align-items: center; gap: 13px; min-height: 86px; padding: 16px; border: 1px solid rgba(255,255,255,.1); border-radius: 17px; background: rgba(13,11,22,.62); box-shadow: 0 12px 40px rgba(0,0,0,.15); }
+    .game-emoji { display: grid; place-items: center; width: 42px; height: 42px; flex: 0 0 42px; background: rgba(184,160,255,.1); border-radius: 13px; font-size: 1.25rem; }
+    .game-tile strong { display: block; font-size: .82rem; }.game-tile small { display: block; margin-top: 2px; color: #8d849f; font-size: .7rem; }
+    .bottom-cta { text-align: center; padding-top: 82px; padding-bottom: 105px; }
+    .cta-card { position: relative; overflow: hidden; padding: 66px 24px; border-radius: 32px; border: 1px solid rgba(184,160,255,.2); background: radial-gradient(ellipse at 50% 120%, rgba(152,105,255,.22), transparent 58%), linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); }
+    .cta-card::before { content: "✦"; position: absolute; top: -75px; right: 8%; font-size: 14rem; color: rgba(184,160,255,.035); pointer-events: none; }
+    .cta-card h2 { max-width: 650px; margin: 13px auto 15px; }
+    .cta-card p { max-width: 570px; margin: 0 auto 27px; color: var(--muted); }
+    footer { border-top: 1px solid rgba(255,255,255,.07); padding: 30px 0 36px; color: #8e879e; font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-brand { color: #d6cfff; font-weight: 740; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .muted-note { color: #766e86; font-size: .72rem; margin-top: 12px; }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 70px; text-align: center; }
+      .hero-copy { margin-inline: auto; }.hero-actions { justify-content: center; }.hero-visual { min-height: 430px; }
+      .trust-row { margin-top: 0; }.features { grid-template-columns: repeat(2,1fr); }
+      .games-panel { grid-template-columns: 1fr; padding: 38px; }.games-copy { text-align: center; }.game-chips { justify-content: center; }.game-grid { max-width: 580px; width: 100%; margin-inline: auto; }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(var(--max), calc(100% - 30px)); }
+      nav { min-height: 69px; }.nav-links { display: none; }.brand { font-size: .95rem; }.brand-mark { width: 35px; height: 35px; }
+      .nav-cta { min-height: 38px; padding-inline: 12px; font-size: .79rem; }
+      .hero { min-height: auto; padding: 62px 0 53px; }.eyebrow { font-size: .72rem; }
+      h1 { font-size: clamp(3rem, 14vw, 4.25rem); }.hero-copy { font-size: .98rem; }
+      .hero-visual { min-height: 370px; }.orbital { width: 330px; }.app-card { max-width: 340px; padding: 15px; }
+      .trust-row { grid-template-columns: 1fr; gap: 14px; padding: 22px 0; }.trust-item { justify-content: flex-start; padding-left: 13%; }
+      section { padding: 76px 0; }.section-heading { margin-bottom: 32px; }.features { grid-template-columns: 1fr; }.feature { min-height: 0; padding: 23px; }
+      .games-panel { padding: 27px 19px; border-radius: 24px; }.game-grid { grid-template-columns: 1fr 1fr; gap: 8px; }.game-tile { gap: 8px; min-height: 77px; padding: 10px; }.game-emoji { width: 34px; height: 34px; flex-basis: 34px; font-size: 1rem; }.game-tile strong { font-size: .73rem; }.game-tile small { font-size: .64rem; }
+      .bottom-cta { padding-top: 28px; padding-bottom: 76px; }.cta-card { padding: 49px 20px; }.footer-inner { align-items: flex-start; flex-direction: column; gap: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="nav-shell">
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Crossroads Bot home"><span class="brand-mark">✦</span><span>Crossroads Bot</span></a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#games">Mini-games</a>
+        <a href="#legal">Legal</a>
+      </div>
+      <!-- Replace YOUR_BOT_INVITE_URL with the bot's Discord OAuth2 invite URL. -->
+      <a class="button button-primary nav-cta" href="YOUR_BOT_INVITE_URL">Add to Discord <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+
+  <main id="top">
+    <div class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> A little utility. A lot of community.</div>
+          <h1 id="hero-title">Your server.<br><span class="gradient-text">Closer together.</span></h1>
+          <p class="hero-copy">Meet Crossroads Bot ✦ — the all-in-one companion for The Crossroads. Keep your community organized, make everyday server tasks easier, and give members more ways to have fun together.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="YOUR_BOT_INVITE_URL">Add to your server <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="#features">Explore features <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="hero-note">Built for conversation, connection, and a little friendly chaos.</p>
+        </div>
+        <div class="hero-visual" aria-label="Illustration of Crossroads Bot features">
+          <div class="orbital"></div><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span><span class="spark s4">✧</span>
+          <div class="app-card">
+            <div class="app-top"><div class="app-top-label"><span class="mini-mark">✦</span> Crossroads Bot <span style="color:#958ba9;font-weight:500">/ app</span></div><span class="online">Community tools</span></div>
+            <div class="server-title">A glimpse inside your server</div>
+            <div class="chat-line"><div class="avatar member">C</div><div class="message"><div class="message-head">crossroads_member <small>just now</small></div><div class="message-body">Anyone up for a quick game? ✨</div></div></div>
+            <div class="chat-line"><div class="avatar">✦</div><div class="message"><div class="message-head">Crossroads Bot <small>APP</small></div><div class="message-body">Pick your next adventure: <span class="command">/trivia</span> <span class="command">/rps</span> <span class="command">/riddle</span></div></div></div>
+            <div class="game-row"><div><strong>🎮 Game night, anyone?</strong><span>Little games. Big bragging rights.</span></div><div class="play-pill">Let's play ↗</div></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><span class="command">/ticket</span><span class="command">/poll</span><span class="command">/remind</span><span class="command">/verify</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="trust-row" aria-label="Bot highlights">
+        <div class="trust-item"><span class="trust-icon">⌘</span> Everyday server tools</div>
+        <div class="trust-item"><span class="trust-icon">♧</span> Community-first features</div>
+        <div class="trust-item"><span class="trust-icon">✧</span> Games for everyone</div>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-heading"><div class="kicker">More than commands</div><h2>Everything your community needs.<br><span class="gradient-text">All in one place.</span></h2><p>Less jumping between bots. More time for the people who make your server feel like home.</p></div>
+        <div class="features">
+          <article class="feature"><div class="feature-icon">♜</div><h3>Moderation & safety</h3><p>Helpful moderation tools give your team ways to manage the server and support a welcoming, SFW community.</p></article>
+          <article class="feature"><div class="feature-icon">✓</div><h3>Member verification</h3><p>Give newcomers a clearer path into the community with verification and onboarding tools.</p></article>
+          <article class="feature"><div class="feature-icon">▤</div><h3>Private support tickets</h3><p>Create a dedicated place for questions, support requests, or concerns that members would rather share discreetly.</p></article>
+          <article class="feature"><div class="feature-icon">◷</div><h3>Reminders & utilities</h3><p>Keep track of useful reminders and make routine server activities a little easier.</p></article>
+          <article class="feature"><div class="feature-icon">↗</div><h3>Leveling & polls</h3><p>Encourage participation, celebrate activity, and give members a voice with interactive community features.</p></article>
+          <article class="feature"><div class="feature-icon">✦</div><h3>Small moments of fun</h3><p>Bring people together with mini-games, quick challenges, riddles, quizzes, and more.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="games-section" id="games">
+      <div class="wrap">
+        <div class="games-panel">
+          <div class="games-copy"><div class="kicker">Break the ice</div><h2>Chat is great.<br><span class="gradient-text">Play is better.</span></h2><p>Turn a quiet channel into a little friendly competition. Challenge yourself, take on your friends, or just see what happens.</p><div class="game-chips"><span class="chip">Trivia & riddles</span><span class="chip">Word challenges</span><span class="chip">Cards & dice</span><span class="chip">Quick reactions</span><span class="chip">Party prompts</span></div></div>
+          <div class="game-grid" aria-label="Examples of mini-games">
+            <div class="game-tile"><span class="game-emoji">🧠</span><div><strong>Trivia time</strong><small>Test what you know</small></div></div>
+            <div class="game-tile"><span class="game-emoji">🃏</span><div><strong>Blackjack</strong><small>Play your hand</small></div></div>
+            <div class="game-tile"><span class="game-emoji">🔤</span><div><strong>Word scramble</strong><small>Unscramble the clue</small></div></div>
+            <div class="game-tile"><span class="game-emoji">⚡</span><div><strong>Reaction test</strong><small>How quick are you?</small></div></div>
+            <div class="game-tile"><span class="game-emoji">🎲</span><div><strong>Dice duel</strong><small>Let luck decide</small></div></div>
+            <div class="game-tile"><span class="game-emoji">❌⭕</span><div><strong>Tic-Tac-Toe</strong><small>Challenge a friend</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-cta" id="legal">
+      <div class="wrap"><div class="cta-card"><div class="kicker">Find your people</div><h2>There’s a place for you<br><span class="gradient-text">at The Crossroads.</span></h2><p>Bring the useful tools, stay for the conversations, and make the community your own.</p><a class="button button-primary" href="YOUR_BOT_INVITE_URL">Bring Crossroads Bot to Discord <span aria-hidden="true">↗</span></a><div class="muted-note">Remember to replace the invite placeholder with your bot's real Discord invite URL before publishing.</div></div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><div class="footer-brand">✦ Crossroads Bot</div><div>Made for The Crossroads community.</div></div>
+      <div class="footer-links"><a href="https://theslumbingcat.github.io/crossroads-bot-legal/crossroads_bot_tos">Terms of Service</a><a href="https://theslumbingcat.github.io/crossroads-bot-legal/crossroads_bot_privacy_policy">Privacy Policy</a><a href="mailto:YOUR_EMAIL@gmail.com">Contact</a></div>
+    </div>
+    <div class="wrap muted-note">Crossroads Bot is a community project and is not affiliated with or endorsed by Discord Inc.</div>
+  </footer>
+</body>
+</html>
